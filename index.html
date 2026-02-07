@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite de Aniversário - Miria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Confetes flutuantes */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Container principal */
+        .invitation-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 50px 40px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Balões flutuantes */
+        .balloon {
+            position: fixed;
+            bottom: -150px;
+            width: 80px;
+            height: 100px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: floatUp 8s ease-in infinite;
+            z-index: 5;
+        }
+
+        .balloon::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .balloon::after {
+            content: '▼';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: inherit;
+            font-size: 12px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                bottom: -150px;
+                opacity: 1;
+                transform: translateX(0) rotate(0deg);
+            }
+            50% {
+                transform: translateX(30px) rotate(10deg);
+            }
+            100% {
+                bottom: 110vh;
+                opacity: 0.8;
+                transform: translateX(-30px) rotate(-10deg);
+            }
+        }
+
+        .balloon-1 { left: 10%; background: #ff6b9d; animation-delay: 0s; animation-duration: 10s; }
+        .balloon-2 { left: 25%; background: #feca57; animation-delay: 2s; animation-duration: 12s; }
+        .balloon-3 { left: 40%; background: #48dbfb; animation-delay: 4s; animation-duration: 9s; }
+        .balloon-4 { left: 55%; background: #ff9ff3; animation-delay: 1s; animation-duration: 11s; }
+        .balloon-5 { left: 70%; background: #54a0ff; animation-delay: 3s; animation-duration: 13s; }
+        .balloon-6 { left: 85%; background: #5f27cd; animation-delay: 5s; animation-duration: 10s; }
+        .balloon-7 { left: 15%; background: #00d2d3; animation-delay: 6s; animation-duration: 11s; }
+        .balloon-8 { left: 90%; background: #ff6348; animation-delay: 7s; animation-duration: 9s; }
+
+        /* Tipografia */
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3em;
+            color: #764ba2;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin: 20px 0;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        .details {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .details p {
+            font-size: 1.2em;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .details strong {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .footer {
+            font-size: 1.1em;
+            color: #555;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* Estrelas decorativas */
+        .star {
+            position: fixed;
+            font-size: 20px;
+            animation: twinkle 2s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Responsivo */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2em; }
+            .subtitle { font-size: 1.2em; }
+            .details p { font-size: 1em; }
+            .invitation-container { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Balões flutuantes -->
+    <div class="balloon balloon-1"></div>
+    <div class="balloon balloon-2"></div>
+    <div class="balloon balloon-3"></div>
+    <div class="balloon balloon-4"></div>
+    <div class="balloon balloon-5"></div>
+    <div class="balloon balloon-6"></div>
+    <div class="balloon balloon-7"></div>
+    <div class="balloon balloon-8"></div>
+
+    <!-- Estrelas decorativas -->
+    <div class="star" style="top: 10%; left: 15%;">✨</div>
+    <div class="star" style="top: 20%; left: 85%; animation-delay: 1s;">⭐</div>
+    <div class="star" style="top: 70%; left: 10%; animation-delay: 0.5s;">✨</div>
+    <div class="star" style="top: 80%; left: 90%; animation-delay: 1.5s;">⭐</div>
+
+    <!-- Convite -->
+    <div class="invitation-container">
+        <h1>Você está convidado!</h1>
+        <div class="emoji">🎉</div>
+        <p class="subtitle">Para a festa de aniversário da</p>
+        <h1 style="color: #f5576c; font-size: 2.5em; animation: none;">Miria</h1>
+        
+        <div class="details">
+            <p><strong>📅 Data:</strong> 15 de Fevereiro de 2026</p>
+            <p><strong>🕐 Horário:</strong> [Adicione o horário aqui]</p>
+            <p><strong>📍 Local:</strong> [Adicione o endereço aqui]</p>
+        </div>
+
+        <p class="footer">Sua presença é muito importante para nós! 💕</p>
+        <p class="footer">Contamos com você!</p>
+    </div>
+
+    <script>
+        // Criar confetes aleatórios
+        function createConfetti() {
+            const colors = ['#ff6b9d', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(confetti);
+            }
+        }
+
+        createConfetti();
+    </script>
+</body>
+</html>
